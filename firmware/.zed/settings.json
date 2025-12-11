@@ -1,0 +1,15 @@
+{
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "cargo": {
+          "allTargets": false
+        },
+        "check": {
+          "command": "clippy",
+          "extraArgs": ["--target", "thumbv7m-none-eabi"]
+        }
+      }
+    }
+  }
+}

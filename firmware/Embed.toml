@@ -1,0 +1,20 @@
+[default.general]
+chip = "STM32F103C8"
+
+[default.rtt]
+enabled = false
+
+[default.reset]
+enabled = true
+
+[default.flashing]
+enabled = true
+do_chip_erase = false
+
+[rtt.rtt]
+enabled = true
+
+[debug.gdb]
+enabled = true
+halt_afterwards = true
+gdb_connection_string = "127.0.0.1:1337"

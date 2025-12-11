@@ -1,0 +1,11 @@
+[build]
+target = "thumbv7m-none-eabi"
+
+[target.thumbv7m-none-eabi]
+rustflags = [
+    "-C", "link-arg=-Tlink.x",
+]
+
+[alias]
+host-test = "test --target aarch64-apple-darwin --lib"
+r = "embed"
