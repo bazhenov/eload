@@ -7,5 +7,5 @@ rustflags = [
 ]
 
 [alias]
-host-test = "test --target aarch64-apple-darwin --lib"
+t = "test --target aarch64-apple-darwin --lib"
 r = "embed"
