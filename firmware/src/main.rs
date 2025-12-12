@@ -9,8 +9,13 @@
 #![no_std]
 #![no_main]
 
+use core::fmt::Write as _;
 use cortex_m_rt::entry;
 use eload::{Encoder, EncoderState, Inputs, Led, State};
+use hd44780_driver::{
+    HD44780, bus::EightBitBusPins, memory_map::MemoryMap1602, setup::DisplayOptions8Bit,
+};
+use heapless::String;
 use nb::block;
 use panic_rtt_target as _;
 use rtt_target::rtt_init_default;
@@ -32,8 +37,45 @@ fn main() -> ! {
     let mut rcc = dp.RCC.constrain();
 
     // Acquire the GPIOC peripheral
+    let mut gpioa = dp.GPIOA.split(&mut rcc);
     let mut gpioc = dp.GPIOC.split(&mut rcc);
     let mut gpiob = dp.GPIOB.split(&mut rcc);
+
+    // Write to an LCD
+    // {
+    let mut delay = dp.TIM1.delay_us(&mut rcc);
+
+    let rs = gpioa.pa8.into_push_pull_output(&mut gpioa.crh);
+    let en = gpioa.pa9.into_push_pull_output(&mut gpioa.crh);
+
+    let d0 = gpioa.pa0.into_push_pull_output(&mut gpioa.crl);
+    let d1 = gpioa.pa1.into_push_pull_output(&mut gpioa.crl);
+    let d2 = gpioa.pa2.into_push_pull_output(&mut gpioa.crl);
+    let d3 = gpioa.pa3.into_push_pull_output(&mut gpioa.crl);
+    let d4 = gpioa.pa4.into_push_pull_output(&mut gpioa.crl);
+    let d5 = gpioa.pa5.into_push_pull_output(&mut gpioa.crl);
+    let d6 = gpioa.pa6.into_push_pull_output(&mut gpioa.crl);
+    let d7 = gpioa.pa7.into_push_pull_output(&mut gpioa.crl);
+
+    let mut lcd = HD44780::new(
+        DisplayOptions8Bit::new(MemoryMap1602::new()).with_pins(EightBitBusPins {
+            rs,
+            en,
+            d0,
+            d1,
+            d2,
+            d3,
+            d4,
+            d5,
+            d6,
+            d7,
+        }),
+        &mut delay,
+    )
+    .ok()
+    .unwrap();
+
+    lcd.reset(&mut delay).unwrap();
 
     let pb10 = gpiob.pb10.into_pull_up_input(&mut gpiob.crh);
     let pb11 = gpiob.pb11.into_pull_up_input(&mut gpiob.crh);
@@ -50,6 +92,9 @@ fn main() -> ! {
     let mut inputs = Inputs::default();
     let mut state = State::default();
 
+    lcd.clear(&mut delay).unwrap();
+    lcd.write_str("Freq: ", &mut delay).unwrap();
+
     loop {
         inputs.encoder = encoder.scan();
 
@@ -57,10 +102,18 @@ fn main() -> ! {
             EncoderState::Cw => state.increase_freq(),
             EncoderState::Ccw => state.decrease_freq(),
             EncoderState::Idle => {}
-        }
+        };
 
         if state.tick() {
             led.toggle();
+        }
+
+        if !matches!(inputs.encoder, EncoderState::Idle) {
+            let mut data = String::<4>::new();
+            write!(&mut data, "{:4}", state.ticks_max).unwrap();
+            let (cols, _) = lcd.display_size().get();
+            lcd.set_cursor_xy((cols - 4, 0), &mut delay).unwrap();
+            lcd.write_str(data.as_str(), &mut delay).unwrap();
         }
 
         block!(timer.wait()).unwrap();
