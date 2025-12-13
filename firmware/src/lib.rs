@@ -12,8 +12,10 @@ impl<T> OutputPin for T where T: embedded_hal::digital::OutputPin<Error = Infall
 impl<T> StatefulOutputPin for T where T: embedded_hal::digital::StatefulOutputPin<Error = Infallible>
 {}
 
+#[derive(Default)]
 pub struct Inputs {
-    pub encoder: EncoderState,
+    pub encoder: Option<EncoderValue>,
+    pub encoder_button: Option<LongPressButtonValue>,
 }
 
 pub struct State {
@@ -50,11 +52,56 @@ impl State {
     }
 }
 
-impl Default for Inputs {
-    fn default() -> Self {
+pub struct LongPressButton<const CONTROL_RATE_HZ: u32, P> {
+    pin: P,
+    state: LongPressButtonState,
+}
+
+pub enum LongPressButtonValue {
+    Press,
+    LongPress,
+}
+
+#[derive(Clone, Copy)]
+pub enum LongPressButtonState {
+    Depressed,
+    Candidate(u32),
+    Pressed(u32),
+    StillPressed, // needed so that second press will not be registered after LongPress detected
+}
+
+const fn max(a: u32, b: u32) -> u32 {
+    if a > b { a } else { b }
+}
+
+impl<const CONTROL_RATE_HZ: u32, P: InputPin> LongPressButton<CONTROL_RATE_HZ, P> {
+    const LONGPRESS_TICKS: u32 = max(1, CONTROL_RATE_HZ); // 1 second
+    const DEBOUNCE_TICKS: u32 = max(1, CONTROL_RATE_HZ / 1000); // 1ms
+
+    pub fn new(pin: P) -> Self {
         Self {
-            encoder: EncoderState::Idle,
+            pin,
+            state: LongPressButtonState::Depressed,
         }
+    }
+
+    pub fn scan(&mut self) -> Option<LongPressButtonValue> {
+        use LongPressButtonState::*;
+        use LongPressButtonValue::*;
+
+        let pressed = self.pin.is_low().unwrap_infallible();
+        let (state, value) = match (pressed, self.state) {
+            (true, Depressed) => (Candidate(0), None),
+            (true, Candidate(i)) if i > Self::DEBOUNCE_TICKS => (Pressed(0), None),
+            (true, Candidate(i)) => (Candidate(i + 1), None),
+            (true, Pressed(i)) if i > Self::LONGPRESS_TICKS => (StillPressed, Some(LongPress)),
+            (true, Pressed(i)) => (Pressed(i + 1), None),
+            (true, StillPressed) => (StillPressed, None),
+            (false, Pressed(_)) => (Depressed, Some(Press)),
+            (false, _) => (Depressed, None),
+        };
+        self.state = state;
+        value
     }
 }
 
@@ -64,8 +111,7 @@ pub struct Encoder<A, B> {
     previous_state: (bool, bool),
 }
 
-pub enum EncoderState {
-    Idle,
+pub enum EncoderValue {
     Cw,
     Ccw,
 }
@@ -78,7 +124,7 @@ impl<A: InputPin, B: InputPin> Encoder<A, B> {
             previous_state: (false, false),
         }
     }
-    pub fn scan(&mut self) -> EncoderState {
+    pub fn scan(&mut self) -> Option<EncoderValue> {
         // Both signals are active low
         let a = self.a_pin.is_low().unwrap_infallible();
         let b = self.b_pin.is_low().unwrap_infallible();
@@ -88,12 +134,12 @@ impl<A: InputPin, B: InputPin> Encoder<A, B> {
 
         if (a, b) == (true, true) {
             match prev {
-                (false, true) => EncoderState::Cw,
-                (true, false) => EncoderState::Ccw,
-                _ => EncoderState::Idle,
+                (false, true) => Some(EncoderValue::Cw),
+                (true, false) => Some(EncoderValue::Ccw),
+                _ => None,
             }
         } else {
-            EncoderState::Idle
+            None
         }
     }
 }

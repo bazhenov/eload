@@ -11,7 +11,7 @@
 
 use core::fmt::Write as _;
 use cortex_m_rt::entry;
-use eload::{Encoder, EncoderState, Inputs, Led, State};
+use eload::{Encoder, EncoderValue, Inputs, Led, LongPressButton, LongPressButtonValue, State};
 use hd44780_driver::{
     HD44780, bus::EightBitBusPins, memory_map::MemoryMap1602, setup::DisplayOptions8Bit,
 };
@@ -23,6 +23,7 @@ use stm32f1xx_hal::{pac, prelude::*, timer::Timer};
 
 const CONTROL_RATE_HZ: u32 = 1000;
 type EncoderLed<T> = Led<true, CONTROL_RATE_HZ, T>;
+type EncoderButton<T> = LongPressButton<CONTROL_RATE_HZ, T>;
 
 #[entry]
 fn main() -> ! {
@@ -77,9 +78,11 @@ fn main() -> ! {
 
     lcd.reset(&mut delay).unwrap();
 
+    let pb5 = gpiob.pb5.into_pull_up_input(&mut gpiob.crl);
     let pb10 = gpiob.pb10.into_pull_up_input(&mut gpiob.crh);
     let pb11 = gpiob.pb11.into_pull_up_input(&mut gpiob.crh);
     let mut encoder = Encoder::new(pb10, pb11);
+    let mut encoder_button = EncoderButton::new(pb5);
 
     let led_pin = gpioc.pc13.into_push_pull_output(&mut gpioc.crh);
     let mut led = EncoderLed::new(led_pin);
@@ -93,22 +96,25 @@ fn main() -> ! {
     let mut state = State::default();
 
     lcd.clear(&mut delay).unwrap();
-    lcd.write_str("Freq: ", &mut delay).unwrap();
 
     loop {
         inputs.encoder = encoder.scan();
+        inputs.encoder_button = encoder_button.scan();
 
-        match inputs.encoder {
-            EncoderState::Cw => state.increase_freq(),
-            EncoderState::Ccw => state.decrease_freq(),
-            EncoderState::Idle => {}
-        };
+        if let Some(input) = inputs.encoder.take() {
+            match input {
+                EncoderValue::Cw => {
+                    state.increase_freq();
+                    lcd.set_cursor_pos(0, &mut delay).unwrap();
+                    lcd.write_str(" CW", &mut delay).unwrap();
+                }
+                EncoderValue::Ccw => {
+                    state.decrease_freq();
+                    lcd.set_cursor_pos(0, &mut delay).unwrap();
+                    lcd.write_str("CCW", &mut delay).unwrap();
+                }
+            };
 
-        if state.tick() {
-            led.toggle();
-        }
-
-        if !matches!(inputs.encoder, EncoderState::Idle) {
             let mut data = String::<4>::new();
             write!(&mut data, "{:4}", state.ticks_max).unwrap();
             let (cols, _) = lcd.display_size().get();
@@ -116,6 +122,95 @@ fn main() -> ! {
             lcd.write_str(data.as_str(), &mut delay).unwrap();
         }
 
+        if let Some(input) = inputs.encoder_button.take() {
+            match input {
+                LongPressButtonValue::Press => {
+                    lcd.set_cursor_pos(0, &mut delay).unwrap();
+                    lcd.write_str(" PR", &mut delay).unwrap();
+                }
+                LongPressButtonValue::LongPress => {
+                    lcd.set_cursor_pos(0, &mut delay).unwrap();
+                    lcd.write_str("LPR", &mut delay).unwrap();
+                }
+            }
+        }
+
+        if state.tick() {
+            led.toggle();
+        }
+
         block!(timer.wait()).unwrap();
+    }
+}
+
+fn foo() {
+    let menu_items = menuItem(
+        "Settings",
+        submenu((
+            menuItem("S1", NullController),
+            menuItem("S1", NullController),
+        )),
+    );
+}
+
+trait MenuController {
+    fn process_inputs_and_redraw(&mut self, inputs: Inputs);
+}
+
+trait MenuChildren {
+    fn process_inputs_and_redraw(&mut self, idx: u8, inputs: Inputs);
+}
+
+struct SubmenuController<C> {
+    current_child: u8,
+    child_active: bool,
+    children: C,
+}
+
+struct NullController;
+
+impl MenuController for NullController {
+    fn process_inputs_and_redraw(&mut self, inputs: Inputs) {}
+}
+
+impl<C> MenuController for SubmenuController<C> {
+    fn process_inputs_and_redraw(&mut self, inputs: Inputs) {}
+}
+
+struct MenuItem<C> {
+    title: &'static str,
+    controller: C,
+}
+
+const fn submenu<C: MenuChildren>(children: C) -> SubmenuController<C> {
+    SubmenuController {
+        current_child: 0,
+        child_active: false,
+        children,
+    }
+}
+
+const fn menuItem<C: MenuController>(title: &'static str, controller: C) -> MenuItem<C> {
+    MenuItem { title, controller }
+}
+
+impl MenuChildren for () {
+    fn process_inputs_and_redraw(&mut self, idx: u8, inputs: Inputs) {}
+}
+
+impl<A: MenuController> MenuChildren for MenuItem<A> {
+    fn process_inputs_and_redraw(&mut self, idx: u8, inputs: Inputs) {
+        assert!(idx == 0);
+        self.controller.process_inputs_and_redraw(inputs);
+    }
+}
+
+impl<A: MenuController, B: MenuController> MenuChildren for (MenuItem<A>, MenuItem<B>) {
+    fn process_inputs_and_redraw(&mut self, idx: u8, inputs: Inputs) {
+        match idx {
+            0 => self.0.controller.process_inputs_and_redraw(inputs),
+            1 => self.1.controller.process_inputs_and_redraw(inputs),
+            _ => panic!("Invalid idx {}", idx),
+        }
     }
 }
