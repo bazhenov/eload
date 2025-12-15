@@ -12,44 +12,9 @@ impl<T> OutputPin for T where T: embedded_hal::digital::OutputPin<Error = Infall
 impl<T> StatefulOutputPin for T where T: embedded_hal::digital::StatefulOutputPin<Error = Infallible>
 {}
 
-#[derive(Default)]
 pub struct Inputs {
     pub encoder: Option<EncoderValue>,
     pub encoder_button: Option<LongPressButtonValue>,
-}
-
-pub struct State {
-    pub ticks_max: u32,
-    pub tick: u32,
-}
-
-impl Default for State {
-    fn default() -> Self {
-        Self {
-            ticks_max: 20,
-            tick: 0,
-        }
-    }
-}
-
-impl State {
-    pub fn increase_freq(&mut self) {
-        self.ticks_max = (self.ticks_max - 20).max(20);
-    }
-
-    pub fn decrease_freq(&mut self) {
-        self.ticks_max = (self.ticks_max + 20).min(1000)
-    }
-
-    pub fn tick(&mut self) -> bool {
-        if self.tick >= self.ticks_max {
-            self.tick = 0;
-            true
-        } else {
-            self.tick += 1;
-            false
-        }
-    }
 }
 
 pub struct LongPressButton<const CONTROL_RATE_HZ: u32, P> {

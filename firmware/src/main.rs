@@ -11,15 +11,24 @@
 
 use core::fmt::Write as _;
 use cortex_m_rt::entry;
-use eload::{Encoder, EncoderValue, Inputs, Led, LongPressButton, LongPressButtonValue, State};
+use eload::{Encoder, EncoderValue, Inputs, Led, LongPressButton, LongPressButtonValue};
 use hd44780_driver::{
-    HD44780, bus::EightBitBusPins, memory_map::MemoryMap1602, setup::DisplayOptions8Bit,
+    HD44780,
+    bus::{EightBitBus, EightBitBusPins},
+    charset::{CharsetUniversal, Fallback},
+    memory_map::{MemoryMap1602, StandardMemoryMap},
+    setup::DisplayOptions8Bit,
 };
 use heapless::String;
 use nb::block;
 use panic_rtt_target as _;
 use rtt_target::rtt_init_default;
-use stm32f1xx_hal::{pac, prelude::*, timer::Timer};
+use stm32f1xx_hal::{
+    gpio::{Output, Pin},
+    pac::{self, TIM1},
+    prelude::*,
+    timer::{DelayUs, Timer},
+};
 
 const CONTROL_RATE_HZ: u32 = 1000;
 type EncoderLed<T> = Led<true, CONTROL_RATE_HZ, T>;
@@ -77,6 +86,9 @@ fn main() -> ! {
     .unwrap();
 
     lcd.reset(&mut delay).unwrap();
+    lcd.clear(&mut delay).unwrap();
+
+    let mut lcd = Ui { lcd, delay };
 
     let pb5 = gpiob.pb5.into_pull_up_input(&mut gpiob.crl);
     let pb10 = gpiob.pb10.into_pull_up_input(&mut gpiob.crh);
@@ -92,47 +104,19 @@ fn main() -> ! {
 
     timer.start(CONTROL_RATE_HZ.Hz()).unwrap();
 
-    let mut inputs = Inputs::default();
     let mut state = State::default();
 
-    lcd.clear(&mut delay).unwrap();
-
     loop {
-        inputs.encoder = encoder.scan();
-        inputs.encoder_button = encoder_button.scan();
+        let inputs = Inputs {
+            encoder: encoder.scan(),
+            encoder_button: encoder_button.scan(),
+        };
 
-        if let Some(input) = inputs.encoder.take() {
-            match input {
-                EncoderValue::Cw => {
-                    state.increase_freq();
-                    lcd.set_cursor_pos(0, &mut delay).unwrap();
-                    lcd.write_str(" CW", &mut delay).unwrap();
-                }
-                EncoderValue::Ccw => {
-                    state.decrease_freq();
-                    lcd.set_cursor_pos(0, &mut delay).unwrap();
-                    lcd.write_str("CCW", &mut delay).unwrap();
-                }
-            };
+        state.handle_inputs(inputs);
 
-            let mut data = String::<4>::new();
-            write!(&mut data, "{:4}", state.ticks_max).unwrap();
-            let (cols, _) = lcd.display_size().get();
-            lcd.set_cursor_xy((cols - 4, 0), &mut delay).unwrap();
-            lcd.write_str(data.as_str(), &mut delay).unwrap();
-        }
-
-        if let Some(input) = inputs.encoder_button.take() {
-            match input {
-                LongPressButtonValue::Press => {
-                    lcd.set_cursor_pos(0, &mut delay).unwrap();
-                    lcd.write_str(" PR", &mut delay).unwrap();
-                }
-                LongPressButtonValue::LongPress => {
-                    lcd.set_cursor_pos(0, &mut delay).unwrap();
-                    lcd.write_str("LPR", &mut delay).unwrap();
-                }
-            }
+        if state.request_redraw {
+            lcd.draw(&state);
+            state.request_redraw = false;
         }
 
         if state.tick() {
@@ -143,74 +127,113 @@ fn main() -> ! {
     }
 }
 
-fn foo() {
-    let menu_items = menuItem(
-        "Settings",
-        submenu((
-            menuItem("S1", NullController),
-            menuItem("S1", NullController),
-        )),
-    );
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum Panel {
+    MainPanel,
+    TicksPanel,
 }
 
-trait MenuController {
-    fn process_inputs_and_redraw(&mut self, inputs: Inputs);
+pub struct State {
+    ticks_max: u32,
+    tick: u32,
+    panel: Panel,
+    request_redraw: bool,
 }
 
-trait MenuChildren {
-    fn process_inputs_and_redraw(&mut self, idx: u8, inputs: Inputs);
-}
-
-struct SubmenuController<C> {
-    current_child: u8,
-    child_active: bool,
-    children: C,
-}
-
-struct NullController;
-
-impl MenuController for NullController {
-    fn process_inputs_and_redraw(&mut self, inputs: Inputs) {}
-}
-
-impl<C> MenuController for SubmenuController<C> {
-    fn process_inputs_and_redraw(&mut self, inputs: Inputs) {}
-}
-
-struct MenuItem<C> {
-    title: &'static str,
-    controller: C,
-}
-
-const fn submenu<C: MenuChildren>(children: C) -> SubmenuController<C> {
-    SubmenuController {
-        current_child: 0,
-        child_active: false,
-        children,
+impl Default for State {
+    fn default() -> Self {
+        Self {
+            ticks_max: 20,
+            tick: 0,
+            panel: Panel::MainPanel,
+            request_redraw: true,
+        }
     }
 }
 
-const fn menuItem<C: MenuController>(title: &'static str, controller: C) -> MenuItem<C> {
-    MenuItem { title, controller }
-}
+impl State {
+    pub fn increase_freq(&mut self) {
+        self.ticks_max = (self.ticks_max - 20).max(20);
+    }
 
-impl MenuChildren for () {
-    fn process_inputs_and_redraw(&mut self, idx: u8, inputs: Inputs) {}
-}
+    pub fn decrease_freq(&mut self) {
+        self.ticks_max = (self.ticks_max + 20).min(1000)
+    }
 
-impl<A: MenuController> MenuChildren for MenuItem<A> {
-    fn process_inputs_and_redraw(&mut self, idx: u8, inputs: Inputs) {
-        assert!(idx == 0);
-        self.controller.process_inputs_and_redraw(inputs);
+    pub fn tick(&mut self) -> bool {
+        if self.tick >= self.ticks_max {
+            self.tick = 0;
+            true
+        } else {
+            self.tick += 1;
+            false
+        }
+    }
+
+    fn handle_inputs(&mut self, mut inputs: Inputs) {
+        if let Some(b) = inputs.encoder_button.take() {
+            match b {
+                LongPressButtonValue::Press => {}
+                LongPressButtonValue::LongPress => {
+                    self.panel = if self.panel == Panel::MainPanel {
+                        Panel::TicksPanel
+                    } else {
+                        Panel::MainPanel
+                    };
+                    self.request_redraw = true;
+                }
+            }
+        }
+        if let Some(input) = inputs.encoder.take() {
+            match input {
+                EncoderValue::Cw => self.increase_freq(),
+                EncoderValue::Ccw => self.decrease_freq(),
+            }
+            self.request_redraw = true;
+        }
     }
 }
 
-impl<A: MenuController, B: MenuController> MenuChildren for (MenuItem<A>, MenuItem<B>) {
-    fn process_inputs_and_redraw(&mut self, idx: u8, inputs: Inputs) {
-        match idx {
-            0 => self.0.controller.process_inputs_and_redraw(inputs),
-            1 => self.1.controller.process_inputs_and_redraw(inputs),
-            _ => panic!("Invalid idx {}", idx),
+#[allow(clippy::type_complexity)]
+struct Ui {
+    lcd: HD44780<
+        EightBitBus<
+            Pin<'A', 8, Output>,
+            Pin<'A', 9, Output>,
+            Pin<'A', 0, Output>,
+            Pin<'A', 1, Output>,
+            Pin<'A', 2, Output>,
+            Pin<'A', 3, Output>,
+            Pin<'A', 4, Output>,
+            Pin<'A', 5, Output>,
+            Pin<'A', 6, Output>,
+            Pin<'A', 7, Output>,
+        >,
+        StandardMemoryMap<16, 2>,
+        Fallback<CharsetUniversal, 32>,
+    >,
+    delay: DelayUs<TIM1>,
+}
+
+impl Ui {
+    fn draw(&mut self, state: &State) {
+        self.lcd.clear(&mut self.delay).unwrap();
+        match state.panel {
+            Panel::MainPanel => {
+                self.lcd.set_cursor_pos(0, &mut self.delay).unwrap();
+                self.lcd.write_str("Main Panel", &mut self.delay).unwrap();
+            }
+            Panel::TicksPanel => {
+                self.lcd.set_cursor_pos(0, &mut self.delay).unwrap();
+                self.lcd.write_str("Ticks Panel", &mut self.delay).unwrap();
+                let mut data = String::<4>::new();
+                write!(&mut data, "{:4}", state.ticks_max).unwrap();
+                let (cols, _) = self.lcd.display_size().get();
+                self.lcd
+                    .set_cursor_xy((cols - 4, 0), &mut self.delay)
+                    .unwrap();
+                self.lcd.write_str(data.as_str(), &mut self.delay).unwrap();
+            }
         }
     }
 }
