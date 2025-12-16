@@ -264,8 +264,14 @@ impl Screen for TicksScreen {
 
     fn handle_input(&mut self, ev: Self::InputEvent, state: &mut Self::State) {
         match ev {
-            InputEvent::Encoder(EncoderValue::Cw) => state.increase_freq(),
-            InputEvent::Encoder(EncoderValue::Ccw) => state.decrease_freq(),
+            InputEvent::Encoder(EncoderValue::Cw) => {
+                state.increase_freq();
+                self.redraw_ticks = true;
+            }
+            InputEvent::Encoder(EncoderValue::Ccw) => {
+                state.decrease_freq();
+                self.redraw_ticks = true;
+            }
             _ => {}
         }
     }
