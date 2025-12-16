@@ -12,11 +12,6 @@ impl<T> OutputPin for T where T: embedded_hal::digital::OutputPin<Error = Infall
 impl<T> StatefulOutputPin for T where T: embedded_hal::digital::StatefulOutputPin<Error = Infallible>
 {}
 
-pub struct Inputs {
-    pub encoder: Option<EncoderValue>,
-    pub encoder_button: Option<LongPressButtonValue>,
-}
-
 pub struct LongPressButton<const CONTROL_RATE_HZ: u32, P> {
     pin: P,
     state: LongPressButtonState,

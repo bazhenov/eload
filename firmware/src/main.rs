@@ -11,7 +11,7 @@
 
 use core::fmt::Write as _;
 use cortex_m_rt::entry;
-use eload::{Encoder, EncoderValue, Inputs, Led, LongPressButton, LongPressButtonValue};
+use eload::{Encoder, EncoderValue, Led, LongPressButton, LongPressButtonValue};
 use hd44780_driver::{
     HD44780,
     bus::{EightBitBus, EightBitBusPins},
@@ -106,18 +106,23 @@ fn main() -> ! {
 
     let mut state = State::default();
 
+    let mut panels = Panels::MainPanel(MainPanel);
+
     loop {
         let inputs = Inputs {
             encoder: encoder.scan(),
             encoder_button: encoder_button.scan(),
         };
 
-        state.handle_inputs(inputs);
+        panels.handle_inputs(inputs, &mut state);
 
-        if state.request_redraw {
-            lcd.draw(&state);
-            state.request_redraw = false;
+        if inputs.encoder.is_some() {
+            panels = Panels::TicksPanel(TicksPanel {
+                redraw_ticks: Some(()),
+            });
         }
+
+        panels.redraw(&mut lcd, &state);
 
         if state.tick() {
             led.toggle();
@@ -127,17 +132,14 @@ fn main() -> ! {
     }
 }
 
-#[derive(Clone, Copy, PartialEq, Eq)]
-enum Panel {
-    MainPanel,
-    TicksPanel,
+pub struct Inputs {
+    pub encoder: Option<EncoderValue>,
+    pub encoder_button: Option<LongPressButtonValue>,
 }
 
 pub struct State {
     ticks_max: u32,
     tick: u32,
-    panel: Panel,
-    request_redraw: bool,
 }
 
 impl Default for State {
@@ -145,8 +147,6 @@ impl Default for State {
         Self {
             ticks_max: 20,
             tick: 0,
-            panel: Panel::MainPanel,
-            request_redraw: true,
         }
     }
 }
@@ -167,29 +167,6 @@ impl State {
         } else {
             self.tick += 1;
             false
-        }
-    }
-
-    fn handle_inputs(&mut self, mut inputs: Inputs) {
-        if let Some(b) = inputs.encoder_button.take() {
-            match b {
-                LongPressButtonValue::Press => {}
-                LongPressButtonValue::LongPress => {
-                    self.panel = if self.panel == Panel::MainPanel {
-                        Panel::TicksPanel
-                    } else {
-                        Panel::MainPanel
-                    };
-                    self.request_redraw = true;
-                }
-            }
-        }
-        if let Some(input) = inputs.encoder.take() {
-            match input {
-                EncoderValue::Cw => self.increase_freq(),
-                EncoderValue::Ccw => self.decrease_freq(),
-            }
-            self.request_redraw = true;
         }
     }
 }
@@ -215,25 +192,88 @@ struct Ui {
     delay: DelayUs<TIM1>,
 }
 
-impl Ui {
-    fn draw(&mut self, state: &State) {
-        self.lcd.clear(&mut self.delay).unwrap();
-        match state.panel {
-            Panel::MainPanel => {
-                self.lcd.set_cursor_pos(0, &mut self.delay).unwrap();
-                self.lcd.write_str("Main Panel", &mut self.delay).unwrap();
-            }
-            Panel::TicksPanel => {
-                self.lcd.set_cursor_pos(0, &mut self.delay).unwrap();
-                self.lcd.write_str("Ticks Panel", &mut self.delay).unwrap();
-                let mut data = String::<4>::new();
-                write!(&mut data, "{:4}", state.ticks_max).unwrap();
-                let (cols, _) = self.lcd.display_size().get();
-                self.lcd
-                    .set_cursor_xy((cols - 4, 0), &mut self.delay)
-                    .unwrap();
-                self.lcd.write_str(data.as_str(), &mut self.delay).unwrap();
-            }
+enum Panels {
+    MainPanel(MainPanel),
+    TicksPanel(TicksPanel),
+}
+
+impl UiPanel<State, Ui, Inputs> for Panels {
+    fn draw(&mut self, ui: &mut Ui, state: &State) {
+        match self {
+            Panels::MainPanel(p) => p.draw(ui, state),
+            Panels::TicksPanel(p) => p.draw(ui, state),
         }
     }
+
+    fn handle_inputs(&mut self, inputs: Inputs, state: &mut State) {
+        match self {
+            Panels::MainPanel(p) => p.handle_inputs(inputs, state),
+            Panels::TicksPanel(p) => p.handle_inputs(inputs, state),
+        };
+    }
+
+    fn redraw(&mut self, ui: &mut Ui, state: &State) {
+        match self {
+            Panels::MainPanel(p) => p.redraw(ui, state),
+            Panels::TicksPanel(p) => p.redraw(ui, state),
+        }
+    }
+}
+
+trait UiPanel<State, Ui, Inputs> {
+    fn draw(&mut self, ui: &mut Ui, state: &State);
+    fn handle_inputs(&mut self, inputs: Inputs, state: &mut State);
+    fn redraw(&mut self, ui: &mut Ui, state: &State);
+}
+
+struct TicksPanel {
+    redraw_ticks: Option<()>,
+}
+
+impl UiPanel<State, Ui, Inputs> for TicksPanel {
+    fn draw(&mut self, ui: &mut Ui, state: &State) {
+        ui.lcd.clear(&mut ui.delay).unwrap();
+        ui.lcd.write_str("Ticks Panel", &mut ui.delay).unwrap();
+        let mut panel = Self {
+            redraw_ticks: Some(()),
+        };
+        panel.redraw(ui, state);
+    }
+
+    fn handle_inputs(&mut self, mut inputs: Inputs, state: &mut State) {
+        if let Some(b) = inputs.encoder.take() {
+            match b {
+                EncoderValue::Cw => state.increase_freq(),
+                EncoderValue::Ccw => state.decrease_freq(),
+            }
+        }
+        if let Some(f) = inputs.encoder_button.take() {
+            // match f {
+            //     LongPressButtonValue::LongPress => state.panel = MainPan
+            // }
+        }
+    }
+
+    fn redraw(&mut self, ui: &mut Ui, state: &State) {
+        if self.redraw_ticks.take().is_some() {
+            let mut data = String::<4>::new();
+            write!(&mut data, "{:4}", state.ticks_max).unwrap();
+            let (cols, _) = ui.lcd.display_size().get();
+            ui.lcd.set_cursor_xy((cols - 4, 0), &mut ui.delay).unwrap();
+            ui.lcd.write_str(data.as_str(), &mut ui.delay).unwrap();
+        }
+    }
+}
+
+struct MainPanel;
+
+impl UiPanel<State, Ui, Inputs> for MainPanel {
+    fn draw(&mut self, ui: &mut Ui, state: &State) {
+        ui.lcd.clear(&mut ui.delay).unwrap();
+        ui.lcd.write_str("Main Panel", &mut ui.delay).unwrap();
+    }
+
+    fn handle_inputs(&mut self, mut inputs: Inputs, state: &mut State) {}
+
+    fn redraw(&mut self, ui: &mut Ui, state: &State) {}
 }
