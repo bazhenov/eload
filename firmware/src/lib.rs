@@ -17,12 +17,13 @@ pub struct LongPressButton<const CONTROL_RATE_HZ: u32, P> {
     state: LongPressButtonState,
 }
 
+#[derive(PartialEq, Eq, Clone, Copy)]
 pub enum LongPressButtonValue {
     Press,
     LongPress,
 }
 
-#[derive(Clone, Copy)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 pub enum LongPressButtonState {
     Depressed,
     Candidate(u32),
@@ -71,6 +72,7 @@ pub struct Encoder<A, B> {
     previous_state: (bool, bool),
 }
 
+#[derive(PartialEq, Eq)]
 pub enum EncoderValue {
     Cw,
     Ccw,
