@@ -11940,7 +11940,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C4657.pdf"
 			(at 236.5248 33.02 0)
 			(effects
 				(font
@@ -11950,6 +11950,15 @@
 			)
 		)
 		(property "Description" "Heatsink"
+			(at 236.22 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C4657"
 			(at 236.22 33.02 0)
 			(effects
 				(font
@@ -11986,7 +11995,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x16_Socket"
+		(property "Value" "JST Header"
 			(at 146.05 124.4599 0)
 			(effects
 				(font
@@ -12005,7 +12014,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C158022.pdf"
 			(at 144.78 121.92 0)
 			(effects
 				(font
@@ -12015,6 +12024,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x16, script generated"
+			(at 144.78 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C158022"
 			(at 144.78 121.92 0)
 			(effects
 				(font
@@ -12099,7 +12117,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "STM32F103C8T6"
+		(property "Value" "STM32F103CBT6"
 			(at 91.0433 191.77 0)
 			(effects
 				(font
@@ -12128,6 +12146,15 @@
 			)
 		)
 		(property "Description" "STMicroelectronics Arm Cortex-M3 MCU, 64KB flash, 20KB RAM, 72 MHz, 2.0-3.6V, 37 GPIO, LQFP48"
+			(at 86.36 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C8734"
 			(at 86.36 148.59 0)
 			(effects
 				(font
@@ -12380,7 +12407,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_SO:SOP-8_3.76x4.96mm_P1.27mm"
+		(property "Footprint" "Package_SO:JEITA_SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 137.16 73.66 0)
 			(effects
 				(font
@@ -12389,7 +12416,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/C47411543.pdf"
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ad8628_8629_8630.pdf"
 			(at 137.16 73.66 0)
 			(effects
 				(font
@@ -12443,7 +12470,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C47411543"
+		(property "LCSC Part #" "C653045"
 			(at 137.16 73.66 0)
 			(effects
 				(font
@@ -13418,7 +13445,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_SO:SOP-8_3.76x4.96mm_P1.27mm"
+		(property "Footprint" "Package_SO:JEITA_SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 151.13 73.66 0)
 			(effects
 				(font
@@ -13427,7 +13454,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/C47411543.pdf"
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ad8628_8629_8630.pdf"
 			(at 151.13 73.66 0)
 			(effects
 				(font
@@ -13481,7 +13508,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C47411543"
+		(property "LCSC Part #" "C653045"
 			(at 151.13 73.66 0)
 			(effects
 				(font
@@ -14962,7 +14989,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_SO:SOP-8_3.76x4.96mm_P1.27mm"
+		(property "Footprint" "Package_SO:JEITA_SOIC-8_3.9x4.9mm_P1.27mm"
 			(at 245.11 55.88 0)
 			(effects
 				(font
@@ -14971,7 +14998,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/C47411543.pdf"
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/ad8628_8629_8630.pdf"
 			(at 245.11 55.88 0)
 			(effects
 				(font
@@ -15025,7 +15052,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C47411543"
+		(property "LCSC Part #" "C653045"
 			(at 245.11 55.88 0)
 			(effects
 				(font
@@ -15242,7 +15269,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "Conn_01x14_Pin"
+		(property "Value" "~"
 			(at 166.37 123.1899 0)
 			(effects
 				(font
@@ -15271,6 +15298,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x14, script generated"
+			(at 165.1 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C41413844"
 			(at 165.1 123.19 0)
 			(effects
 				(font
@@ -16542,7 +16578,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal"
 			(at 133.35 41.148 90)
 			(effects
 				(font
@@ -17104,7 +17140,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x16_Socket"
+		(property "Value" "JST Header"
 			(at 265.43 142.2399 0)
 			(effects
 				(font
@@ -17133,6 +17169,15 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x16, script generated"
+			(at 264.16 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C158022"
 			(at 264.16 139.7 0)
 			(effects
 				(font
@@ -17766,7 +17811,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/C865475.pdf"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C865684.pdf"
 			(at 226.06 48.26 0)
 			(effects
 				(font
@@ -18050,7 +18095,7 @@
 				)
 			)
 		)
-		(property "Value" "90K"
+		(property "Value" "89.8K"
 			(at 214.63 88.9 90)
 			(effects
 				(font
@@ -18082,6 +18127,15 @@
 				(font
 					(size 1.016 1.016)
 				)
+			)
+		)
+		(property "LCSC Part #" "C865684"
+			(at 214.63 83.82 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
 			)
 		)
 		(pin "1"
