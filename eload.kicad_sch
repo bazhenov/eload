@@ -12014,7 +12014,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/C158022.pdf"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C158018.pdf"
 			(at 144.78 121.92 0)
 			(effects
 				(font
@@ -12032,7 +12032,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C158022"
+		(property "LCSC Part #" "C158018"
 			(at 144.78 121.92 0)
 			(effects
 				(font
@@ -12154,7 +12154,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C8734"
+		(property "LCSC Part #" "C8304"
 			(at 86.36 148.59 0)
 			(effects
 				(font
@@ -12517,7 +12517,7 @@
 		(at 30.48 76.2 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -14336,7 +14336,7 @@
 		(at 30.48 63.5 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -14470,8 +14470,8 @@
 		(at 44.45 121.92 90)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
+		(in_bom no)
+		(on_board no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8005acbf-4f70-4526-bd9b-448899e364f9")
@@ -14541,7 +14541,7 @@
 		(at 30.48 60.96 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -14937,7 +14937,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C3816270"
+		(property "LCSC Part #" "C16283"
 			(at 236.22 44.45 90)
 			(effects
 				(font
@@ -15255,7 +15255,7 @@
 		(at 165.1 123.19 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -15451,7 +15451,7 @@
 		(at 30.48 71.12 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "9fcc6b0f-f2b4-4d28-9498-4f0d0175d77c")
@@ -15716,7 +15716,7 @@
 		(at 30.48 66.04 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -16031,7 +16031,7 @@
 		(at 30.48 73.66 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "b552856c-fb59-4519-99eb-7978291f5b35")
@@ -17159,7 +17159,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C158022.pdf"
 			(at 264.16 139.7 0)
 			(effects
 				(font
@@ -18026,7 +18026,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/C3816270.pdf"
+		(property "Datasheet" ""
 			(at 158.75 162.56 0)
 			(effects
 				(font
@@ -18036,6 +18036,15 @@
 			)
 		)
 		(property "Description" ""
+			(at 158.75 162.56 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C5665"
 			(at 158.75 162.56 0)
 			(effects
 				(font
@@ -18158,7 +18167,7 @@
 		(at 30.48 68.58 270)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
