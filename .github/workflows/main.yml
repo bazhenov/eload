@@ -18,6 +18,7 @@ jobs:
           sch_bom: true # Generate BOM
           kicad_pcb: eload.kicad_pcb
           pcb_gerbers: true # Generate Gerbers
+          pcb_image: true
 
       # Upload production files only if generation succeeded
       - name: Upload production files
@@ -29,6 +30,8 @@ jobs:
             ${{ github.workspace }}/sch.pdf
             ${{ github.workspace }}/bom.csv
             ${{ github.workspace }}/gbr.zip
+            ${{ github.workspace }}/images/top.png
+            ${{ github.workspace }}/images/bottom.png
 
       - name: Run KiCad ERC
         id: erc
