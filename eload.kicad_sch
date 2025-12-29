@@ -17126,7 +17126,7 @@
 				)
 			)
 		)
-		(property "Footprint" "TerminalBlock_CUI:TerminalBlock_CUI_TB007-508-02_1x02_P5.08mm_Horizontal"
+		(property "Footprint" "Connector:Banana_Jack_2Pin"
 			(at 120.65 39.37 0)
 			(effects
 				(font
