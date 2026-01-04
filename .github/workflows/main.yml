@@ -41,13 +41,14 @@ jobs:
           kicad_sch: eload.kicad_sch
           sch_erc: true
 
-      - name: Run KiCad DRC
-        id: drc
-        uses: sparkengineering/kicad-action@v4
-        if: '!cancelled()'
-        with:
-          kicad_pcb: eload.kicad_pcb
-          pcb_drc: true
+      # DRC disabled because we're still in schematic capture phase
+      # - name: Run KiCad DRC
+      #   id: drc
+      #   uses: sparkengineering/kicad-action@v4
+      #   if: '!cancelled()'
+      #   with:
+      #     kicad_pcb: eload.kicad_pcb
+      #     pcb_drc: true
 
       # Upload ERC report only if ERC failed
       - name: Upload ERC report
