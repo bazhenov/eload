@@ -3429,6 +3429,269 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "Device:Q_NPN_BRT"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "Q"
+				(at 3.81 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "Q_NPN_BRT"
+				(at 3.81 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "NPN bias resistor bipolar junction transistor"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "BJT"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Q_NPN_BRT_0_1"
+				(rectangle
+					(start -6.35 0.508)
+					(end -4.826 -0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(rectangle
+					(start -4.318 -2.286)
+					(end -3.302 -0.762)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center -3.81 0)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy -3.81 -0.762) (xy -3.81 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -3.81 -2.286) (xy -3.81 -3.302) (xy 1.27 -3.302)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.762 0) (xy -4.826 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 1.524) (xy -0.635 -1.524)
+					)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 1.27 -3.302)
+					(radius 0.254)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+			)
+			(symbol "Q_NPN_BRT_1_1"
+				(polyline
+					(pts
+						(xy -0.635 0.635) (xy 1.27 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.635 -0.635) (xy 1.27 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 0 0)
+					(radius 2.8194)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.778) (xy 0.508 -1.27) (xy 1.016 -2.286) (xy 0 -1.778)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(pin input line
+					(at -8.89 0 0)
+					(length 2.54)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 1.27 5.08 270)
+					(length 2.54)
+					(name "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 1.27 -5.08 90)
+					(length 2.54)
+					(name "E"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "E"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Device:R_Small"
 			(pin_numbers
 				(hide yes)
@@ -5492,250 +5755,6 @@
 					(at 2.54 -5.08 90)
 					(length 2.54)
 					(name "S"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "Simulation_SPICE:NPN"
-			(pin_numbers
-				(hide yes)
-			)
-			(pin_names
-				(offset 0)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "Q"
-				(at -2.54 7.62 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "NPN"
-				(at -2.54 5.08 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 63.5 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_BJTs"
-				(at 63.5 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Bipolar transistor symbol for simulation only, substrate tied to the emitter"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Device" "NPN"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Type" "GUMMELPOON"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Sim.Pins" "1=C 2=B 3=E"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "simulation"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "NPN_0_1"
-				(polyline
-					(pts
-						(xy -2.54 0) (xy 0.635 0)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.635 1.905) (xy 0.635 -1.905) (xy 0.635 -1.905)
-					)
-					(stroke
-						(width 0.508)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.635 0.635) (xy 2.54 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0.635 -0.635) (xy 2.54 -2.54) (xy 2.54 -2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 1.27 0)
-					(radius 2.8194)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 1.27 -1.778) (xy 1.778 -1.27) (xy 2.286 -2.286) (xy 1.27 -1.778) (xy 1.27 -1.778)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.794 -1.27) (xy 2.794 -1.27)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 2.794 -1.27) (xy 2.794 -1.27)
-					)
-					(stroke
-						(width 0.1524)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "NPN_1_1"
-				(pin input line
-					(at -5.08 0 0)
-					(length 2.54)
-					(name "B"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 2.54 5.08 270)
-					(length 2.54)
-					(name "C"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_emitter line
-					(at 2.54 -5.08 90)
-					(length 2.54)
-					(name "E"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -9713,7 +9732,7 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 92.71) (xy 113.03 92.71)
+			(xy 116.84 95.25) (xy 113.03 95.25)
 		)
 		(stroke
 			(width 0)
@@ -10223,7 +10242,7 @@
 	)
 	(wire
 		(pts
-			(xy 116.84 91.44) (xy 116.84 92.71)
+			(xy 116.84 93.98) (xy 116.84 95.25)
 		)
 		(stroke
 			(width 0)
@@ -13379,7 +13398,7 @@
 	)
 	(symbol
 		(lib_id "power:+3.3V")
-		(at 113.03 92.71 90)
+		(at 113.03 95.25 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13388,7 +13407,7 @@
 		(fields_autoplaced yes)
 		(uuid "4b0f6824-2fb0-4105-ae6a-f0d24b061ea4")
 		(property "Reference" "#PWR059"
-			(at 116.84 92.71 0)
+			(at 116.84 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13397,7 +13416,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 109.22 92.7099 90)
+			(at 109.22 95.2499 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13406,7 +13425,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 113.03 92.71 0)
+			(at 113.03 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13415,7 +13434,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 113.03 92.71 0)
+			(at 113.03 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13424,7 +13443,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+3.3V\""
-			(at 113.03 92.71 0)
+			(at 113.03 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13524,8 +13543,8 @@
 		)
 	)
 	(symbol
-		(lib_id "Simulation_SPICE:NPN")
-		(at 116.84 86.36 90)
+		(lib_id "Device:Q_NPN_BRT")
+		(at 116.84 85.09 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13534,7 +13553,7 @@
 		(fields_autoplaced yes)
 		(uuid "51c16659-4a59-4bdf-b337-27232cd3852f")
 		(property "Reference" "Q4"
-			(at 116.84 80.01 90)
+			(at 117.1448 80.01 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13542,7 +13561,7 @@
 			)
 		)
 		(property "Value" "DTC043Z"
-			(at 116.84 80.01 90)
+			(at 116.84 78.74 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13551,7 +13570,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 116.84 22.86 0)
+			(at 116.84 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13560,7 +13579,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/datasheet/C96459.pdf"
-			(at 116.84 22.86 0)
+			(at 116.84 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13569,34 +13588,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 116.84 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Device" "NPN"
-			(at 116.84 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Type" "GUMMELPOON"
-			(at 116.84 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Sim.Pins" "1=C 2=B 3=E"
-			(at 116.84 86.36 0)
+			(at 116.84 85.09 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13605,7 +13597,7 @@
 			)
 		)
 		(property "LCSC Part #" "C96459"
-			(at 116.84 86.36 90)
+			(at 116.84 85.09 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13613,13 +13605,13 @@
 				(hide yes)
 			)
 		)
-		(pin "2"
+		(pin "B"
 			(uuid "9f1952d5-2451-4f38-9b92-9e9b985c4ee5")
 		)
-		(pin "3"
+		(pin "C"
 			(uuid "f4bc251c-7e1b-43a1-b53f-a1dd7a17a02e")
 		)
-		(pin "1"
+		(pin "E"
 			(uuid "796caac4-d24b-4abe-877c-53141361eeae")
 		)
 		(instances
@@ -14587,7 +14579,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C110775.pdf"
 			(at 33.02 154.94 0)
 			(effects
 				(font
@@ -17406,7 +17398,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C110775.pdf"
 			(at 25.4 154.94 0)
 			(effects
 				(font
@@ -18136,7 +18128,7 @@
 				)
 			)
 		)
-		(property "Value" "220R"
+		(property "Value" "150R"
 			(at 106.68 81.28 90)
 			(effects
 				(font
@@ -18144,7 +18136,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 106.68 83.82 0)
 			(effects
 				(font
@@ -18153,7 +18145,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C844818.pdf"
 			(at 106.68 83.82 0)
 			(effects
 				(font
@@ -18162,8 +18154,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "VISHAY CRCW0805150RFKEA"
 			(at 106.68 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C844818"
+			(at 106.68 83.82 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18683,7 +18684,7 @@
 				)
 			)
 		)
-		(property "Value" "220R"
+		(property "Value" "150R"
 			(at 115.57 76.2 90)
 			(effects
 				(font
@@ -18691,7 +18692,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
 			(at 115.57 71.12 0)
 			(effects
 				(font
@@ -18700,7 +18701,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C844818.pdf"
 			(at 115.57 71.12 0)
 			(effects
 				(font
@@ -18709,8 +18710,17 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, small symbol"
+		(property "Description" "VISHAY CRCW0805150RFKEA"
 			(at 115.57 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C844818"
+			(at 115.57 71.12 90)
 			(effects
 				(font
 					(size 1.27 1.27)
