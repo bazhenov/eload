@@ -11873,7 +11873,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "1d36c1db-a534-4229-b302-262a5d542c75")
 		(property "Reference" "K1"
 			(at 180.34 27.94 90)
@@ -12434,7 +12433,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/datasheet/C19077437.pdf"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C507913.pdf"
 			(at 212.09 54.61 0)
 			(effects
 				(font
@@ -12452,7 +12451,7 @@
 				(justify left)
 			)
 		)
-		(property "LCSC Part #" "C19077437"
+		(property "LCSC Part #" "C507913"
 			(at 212.09 54.61 90)
 			(effects
 				(font
@@ -12871,6 +12870,7 @@
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
 		(property "Footprint" ""
@@ -17200,7 +17200,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "NMOS"
+		(property "Value" "HL 40N05"
 			(at 186.69 67.3099 0)
 			(effects
 				(font
@@ -17210,7 +17210,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-3"
 			(at 187.96 63.5 0)
 			(effects
 				(font
@@ -17219,7 +17219,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://ngspice.sourceforge.io/docs/ngspice-html-manual/manual.xhtml#cha_MOSFETs"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C7543825.pdf"
 			(at 193.04 78.74 0)
 			(effects
 				(font
@@ -17228,7 +17228,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "N-MOSFET transistor, drain/source/gate"
+		(property "Description" ""
 			(at 193.04 66.04 0)
 			(effects
 				(font
@@ -17257,6 +17257,15 @@
 		)
 		(property "Sim.Pins" "1=D 2=G 3=S"
 			(at 193.04 81.28 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C7543825"
+			(at 193.04 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17952,7 +17961,7 @@
 				)
 			)
 		)
-		(property "Value" "D"
+		(property "Value" "MBR120VLSFT1G"
 			(at 180.34 60.96 0)
 			(effects
 				(font
@@ -17970,7 +17979,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/datasheet/C223608.pdf"
 			(at 180.34 57.15 0)
 			(effects
 				(font
@@ -17979,7 +17988,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Diode"
+		(property "Description" "20V 1A Vf=0.3V"
 			(at 180.34 57.15 0)
 			(effects
 				(font
@@ -17998,6 +18007,15 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
+			(at 180.34 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part #" "C223608"
 			(at 180.34 57.15 0)
 			(effects
 				(font
