@@ -7180,7 +7180,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "kicad:SWD Header"
+		(symbol "eload:SWD Header"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -22419,7 +22419,7 @@
 		)
 	)
 	(symbol
-		(lib_id "kicad:SWD Header")
+		(lib_id "eload:SWD Header")
 		(at 118.11 165.1 0)
 		(mirror y)
 		(unit 1)
