@@ -187,7 +187,10 @@
         }
       ],
       "track_widths": [
-        0.0
+        0.0,
+        0.2,
+        0.3,
+        1.0
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -497,7 +500,7 @@
         "clearance": 0.15,
         "line_style": 0,
         "name": "POWER",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "pcb_color": "rgb(255, 183, 0)",
         "priority": 0,
         "schematic_color": "rgb(255, 164, 0)",
         "track_width": 0.3,
@@ -508,7 +511,7 @@
         "clearance": 0.5,
         "line_style": 0,
         "name": "POWER_1A",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "pcb_color": "rgb(0, 255, 14)",
         "priority": 1,
         "schematic_color": "rgb(255, 0, 28)",
         "track_width": 1.0,
@@ -616,7 +619,7 @@
           "group_by": false,
           "label": "Footprint",
           "name": "Footprint",
-          "show": false
+          "show": true
         },
         {
           "group_by": false,
@@ -667,7 +670,7 @@
           "show": false
         }
       ],
-      "filter_string": "R",
+      "filter_string": "Q",
       "group_symbols": false,
       "include_excluded_from_bom": true,
       "name": "",
