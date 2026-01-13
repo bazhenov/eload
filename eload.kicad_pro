@@ -1,6 +1,26 @@
 {
   "board": {
-    "3dviewports": [],
+    "3dviewports": [
+      {
+        "name": "Side View",
+        "ww": 1.0,
+        "wx": -12.526111602783203,
+        "wy": -5.89316463470459,
+        "wz": -11.332326889038086,
+        "xw": 0.0,
+        "xx": -0.01602107472717762,
+        "xy": 0.7847858667373657,
+        "xz": -0.619560956954956,
+        "yw": 0.0,
+        "yx": -0.9997331500053406,
+        "yy": -0.0022526110988110304,
+        "yz": 0.022998245432972908,
+        "zw": 0.0,
+        "zx": 0.016653556376695633,
+        "zy": 0.619763970375061,
+        "zz": 0.7846117615699768
+      }
+    ],
     "design_settings": {
       "defaults": {
         "apply_defaults_to_fp_fields": false,
@@ -37,9 +57,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.8,
-          "height": 1.27,
-          "width": 2.54
+          "drill": 3.2,
+          "height": 3.2,
+          "width": 3.2
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -190,6 +210,7 @@
         0.0,
         0.2,
         0.3,
+        0.5,
         1.0
       ],
       "tuning_pattern_settings": {
@@ -500,7 +521,7 @@
         "clearance": 0.15,
         "line_style": 0,
         "name": "POWER",
-        "pcb_color": "rgb(255, 183, 0)",
+        "pcb_color": "rgb(59, 91, 111)",
         "priority": 0,
         "schematic_color": "rgb(255, 164, 0)",
         "track_width": 0.3,
@@ -511,7 +532,7 @@
         "clearance": 0.5,
         "line_style": 0,
         "name": "POWER_1A",
-        "pcb_color": "rgb(0, 255, 14)",
+        "pcb_color": "rgb(255, 100, 4)",
         "priority": 1,
         "schematic_color": "rgb(255, 0, 28)",
         "track_width": 1.0,
