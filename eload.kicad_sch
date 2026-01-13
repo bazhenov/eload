@@ -9262,16 +9262,6 @@
 	)
 	(wire
 		(pts
-			(xy 110.49 71.12) (xy 113.03 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8ae23f26-3215-4977-871e-72d05ff636cd")
-	)
-	(wire
-		(pts
 			(xy 257.81 82.55) (xy 257.81 83.82)
 		)
 		(stroke
@@ -9909,6 +9899,16 @@
 			(type default)
 		)
 		(uuid "c6b79097-a79e-442e-aab1-be1f83337b6e")
+	)
+	(wire
+		(pts
+			(xy 107.95 71.12) (xy 110.49 71.12)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c7c4754e-40ca-4d0a-aa35-6c5601defbf7")
 	)
 	(bus
 		(pts
@@ -15510,7 +15510,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+		(property "Footprint" "TestPoint:TestPoint_Loop_D1.80mm_Drill1.0mm_Beaded"
 			(at 35.56 82.55 0)
 			(effects
 				(font
@@ -15910,7 +15910,7 @@
 	)
 	(symbol
 		(lib_id "Device:LED")
-		(at 106.68 71.12 180)
+		(at 114.3 71.12 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15918,7 +15918,7 @@
 		(dnp no)
 		(uuid "89fbc891-d19c-4564-a9f8-562851afedf3")
 		(property "Reference" "D3"
-			(at 103.632 69.088 0)
+			(at 111.252 69.088 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15926,7 +15926,7 @@
 			)
 		)
 		(property "Value" "17-215/GHC-YR1S2/4T"
-			(at 108.2675 66.04 0)
+			(at 115.8875 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15935,7 +15935,7 @@
 			)
 		)
 		(property "Footprint" "LED_SMD:LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder"
-			(at 106.68 71.12 0)
+			(at 114.3 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15944,7 +15944,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.everlighteurope.com/custom/files/datasheets/DSE-0025578.pdf"
-			(at 106.68 71.12 0)
+			(at 114.3 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15953,7 +15953,7 @@
 			)
 		)
 		(property "Description" "Green"
-			(at 106.68 74.168 0)
+			(at 114.3 74.168 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15961,7 +15961,7 @@
 			)
 		)
 		(property "Sim.Pins" "1=K 2=A"
-			(at 106.68 71.12 0)
+			(at 114.3 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15970,7 +15970,7 @@
 			)
 		)
 		(property "LCSC Part #" "C2985995"
-			(at 106.68 71.12 0)
+			(at 114.3 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19008,7 +19008,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small")
-		(at 115.57 71.12 90)
+		(at 105.41 71.12 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -19017,7 +19017,7 @@
 		(fields_autoplaced yes)
 		(uuid "f1d95025-b740-4a3d-a50d-cb38d4b67065")
 		(property "Reference" "R10"
-			(at 115.57 73.66 90)
+			(at 105.41 73.66 90)
 			(effects
 				(font
 					(size 1.016 1.016)
@@ -19025,7 +19025,7 @@
 			)
 		)
 		(property "Value" "150R"
-			(at 115.57 76.2 90)
+			(at 105.41 76.2 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19033,7 +19033,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
-			(at 115.57 71.12 0)
+			(at 105.41 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19042,7 +19042,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/datasheet/C844818.pdf"
-			(at 115.57 71.12 0)
+			(at 105.41 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19051,7 +19051,7 @@
 			)
 		)
 		(property "Description" "VISHAY CRCW0805150RFKEA"
-			(at 115.57 71.12 0)
+			(at 105.41 71.12 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -19060,7 +19060,7 @@
 			)
 		)
 		(property "LCSC Part #" "C844818"
-			(at 115.57 71.12 90)
+			(at 105.41 71.12 90)
 			(effects
 				(font
 					(size 1.27 1.27)
