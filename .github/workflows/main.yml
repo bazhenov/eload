@@ -13,6 +13,7 @@ jobs:
         uses: bazhenov/kicad-action@main
         if: '!cancelled()'
         with:
+          kicad_version: 9.0.6
           kicad_sch: eload.kicad_sch
           sch_pdf: true # Generate PDF
           sch_bom: true # Generate BOM
