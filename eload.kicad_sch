@@ -2302,6 +2302,26 @@
 					(hide yes)
 				)
 			)
+			(property private "KLC_S3.3" "The rectangle is not a symbol body but a graphical element"
+				(at 0 -12.7 0)
+				(show_name)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property private "KLC_S4.1" "Some pins are on 50mil grid to make the symbol small"
+				(at 0 -15.24 0)
+				(show_name)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
 			(property "ki_keywords" "quartz ceramic resonator oscillator"
 				(at 0 0 0)
 				(effects
@@ -2382,18 +2402,6 @@
 				)
 				(polyline
 					(pts
-						(xy 0 3.556) (xy 0 3.81)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
 						(xy 0 -3.81) (xy 0 -3.556)
 					)
 					(stroke
@@ -2449,9 +2457,9 @@
 					)
 				)
 				(pin passive line
-					(at 0 5.08 270)
+					(at 0 -5.08 90)
 					(length 1.27)
-					(name "2"
+					(name "G"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2469,7 +2477,8 @@
 				(pin passive line
 					(at 0 -5.08 90)
 					(length 1.27)
-					(name "4"
+					(hide yes)
+					(name "G"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -7917,16 +7926,6 @@
 	)
 	(wire
 		(pts
-			(xy 105.41 158.75) (xy 100.33 158.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1226665e-fbcf-442b-8b54-569875d01035")
-	)
-	(wire
-		(pts
 			(xy 69.85 73.66) (xy 73.66 73.66)
 		)
 		(stroke
@@ -8084,16 +8083,6 @@
 			(type default)
 		)
 		(uuid "2bf88f62-82b9-423a-8aef-10ded6c2daca")
-	)
-	(wire
-		(pts
-			(xy 100.33 158.75) (xy 100.33 160.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2cb5f00d-5d59-460b-8a2a-375374f6066c")
 	)
 	(wire
 		(pts
@@ -8394,16 +8383,6 @@
 			(type default)
 		)
 		(uuid "425807dd-5d52-4ea5-8ee3-503849331133")
-	)
-	(wire
-		(pts
-			(xy 105.41 163.83) (xy 105.41 158.75)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "429a67ad-3885-4b04-82c1-5ea84c7d711f")
 	)
 	(wire
 		(pts
@@ -12110,7 +12089,7 @@
 		(fields_autoplaced yes)
 		(uuid "2ef73168-2c7f-4954-bcdb-c4c792c6a521")
 		(property "Reference" "Y1"
-			(at 113.03 162.4898 0)
+			(at 105.41 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12118,7 +12097,7 @@
 			)
 		)
 		(property "Value" "16MHz"
-			(at 113.03 165.0298 0)
+			(at 105.41 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17551,73 +17530,6 @@
 			(project ""
 				(path "/6911506d-905a-4c6c-8722-d6c9741e8402"
 					(reference "J2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 100.33 160.02 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "ca33d7e2-b750-43b2-ab40-0759faa5d820")
-		(property "Reference" "#PWR02"
-			(at 100.33 166.37 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 100.33 165.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" ""
-			(at 100.33 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 100.33 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 100.33 160.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "51d55cf8-bff4-4da8-853f-0b373ff639e7")
-		)
-		(instances
-			(project "eload"
-				(path "/6911506d-905a-4c6c-8722-d6c9741e8402"
-					(reference "#PWR02")
 					(unit 1)
 				)
 			)
