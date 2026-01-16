@@ -10,7 +10,7 @@ jobs:
 
       - name: Export production files
         id: production
-        uses: sparkengineering/kicad-action@v4
+        uses: bazhenov/kicad-action
         if: '!cancelled()'
         with:
           kicad_sch: eload.kicad_sch
@@ -35,9 +35,10 @@ jobs:
 
       - name: Run KiCad ERC
         id: erc
-        uses: sparkengineering/kicad-action@v4
+        uses: bazhenov/kicad-action
         if: '!cancelled()'
         with:
+          kicad_version: 9.0.6
           kicad_sch: eload.kicad_sch
           sch_erc: true
 
