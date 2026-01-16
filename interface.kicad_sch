@@ -3736,7 +3736,7 @@
 				)
 			)
 		)
-		(property "Value" "DTC043Z"
+		(property "Value" "DTC043ZUBTL"
 			(at 109.22 139.7 90)
 			(effects
 				(font
@@ -3745,7 +3745,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-416"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-323_SC-70"
 			(at 109.22 146.05 0)
 			(effects
 				(font
@@ -3763,7 +3763,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "NPN bias resistor bipolar junction transistor"
 			(at 109.22 146.05 0)
 			(effects
 				(font
@@ -3772,7 +3772,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C96459"
+		(property "LCSC Part #" "C962655"
 			(at 109.22 146.05 90)
 			(effects
 				(font
@@ -3884,7 +3884,7 @@
 				)
 			)
 		)
-		(property "Value" "DTC043Z"
+		(property "Value" "DTC043ZUBTL"
 			(at 63.5 139.7 90)
 			(effects
 				(font
@@ -3893,7 +3893,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-416"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-323_SC-70"
 			(at 63.5 146.05 0)
 			(effects
 				(font
@@ -3920,7 +3920,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC Part #" "C96459"
+		(property "LCSC Part #" "C962655"
 			(at 63.5 146.05 90)
 			(effects
 				(font
