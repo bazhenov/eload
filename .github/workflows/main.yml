@@ -10,7 +10,7 @@ jobs:
 
       - name: Export production files
         id: production
-        uses: bazhenov/kicad-action
+        uses: bazhenov/kicad-action@main
         if: '!cancelled()'
         with:
           kicad_sch: eload.kicad_sch
@@ -35,7 +35,7 @@ jobs:
 
       - name: Run KiCad ERC
         id: erc
-        uses: bazhenov/kicad-action
+        uses: bazhenov/kicad-action@main
         if: '!cancelled()'
         with:
           kicad_version: 9.0.6
