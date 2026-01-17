@@ -548,7 +548,7 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.5,
+        "clearance": 0.3,
         "line_style": 0,
         "name": "POWER_1A",
         "pcb_color": "rgb(255, 100, 4)",
@@ -710,7 +710,7 @@
           "show": false
         }
       ],
-      "filter_string": "Q",
+      "filter_string": "J",
       "group_symbols": false,
       "include_excluded_from_bom": true,
       "name": "",
